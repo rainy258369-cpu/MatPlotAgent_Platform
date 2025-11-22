@@ -10,15 +10,22 @@
   >
     <a-card
       title="MatPlotAgent"
-      :style="{ width: '300px', height: '300px', display: 'flex', justifyContent: 'center' }"
+      :style="{ width: '350px', height: '250px' }"
       :header-style="{ textAlign: 'center', color: 'rgb(var(--arcoblue-6))' }"
+      :body-style="{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1,
+      }"
     >
       <a-form :model="userInfo" @submit="handleLogin">
-        <a-form-item field="email">
+        <a-form-item field="email" label="邮箱">
           <a-input placeholder="请输入邮箱" v-model="userInfo.email"></a-input>
         </a-form-item>
-        <a-form-item field="password">
-          <a-input placeholder="请输入密码" v-model="userInfo.password"></a-input>
+        <a-form-item field="password" label="密码">
+          <a-input placeholder="请输入密码，长度为8~16位" v-model="userInfo.password"></a-input>
         </a-form-item>
         <a-form-item>
           <a-button html-type="submit" type="primary">登录</a-button>
