@@ -60,40 +60,48 @@ const goToGenerate = () => {
 }
 </script>
 
-<style scoped>
+<style>
 .result {
   position: relative;
   width: 600px;
   height: 100%;
   padding: 20px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 20px;
 }
 
 .bubble {
   background: #f2f3f5;
   width: fit-content;
-  height: fit-content;
-  padding: 5px 15px;
+  max-width: 400px;
+  padding: 12px 16px;
   border-radius: 20px;
-  margin-bottom: 20px;
   border: 1px solid #e5e6eb;
-  position: absolute;
-  top: 80px;
-  right: 0;
+  position: relative;
+  margin-left: auto; /* 靠右显示 */
+  justify-self: end; /* Grid 中的右对齐 */
+
   /* 文字样式 */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   color: #333;
-
-  /* 阴影和效果 */
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+  /* 确保气泡高度自适应 */
+  min-height: 40px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+.content-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px; /* 确保有最小高度 */
 }
 
 .image-container {
@@ -106,9 +114,12 @@ const goToGenerate = () => {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-
 .no-image {
   margin: 40px 0;
+}
+
+.create-time {
+  margin-top: 10px;
 }
 
 .answer-text {
@@ -117,5 +128,7 @@ const goToGenerate = () => {
   background: #f8f9fa;
   border-radius: 8px;
   border-left: 4px solid #3491fa;
+  width: 100%;
+  max-width: 500px;
 }
 </style>
