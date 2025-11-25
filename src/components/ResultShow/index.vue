@@ -3,7 +3,8 @@
     <div class="bubble">{{ input_text }}</div>
 
     <div v-if="result_image_url" class="image-container">
-      <a-image :src="result_image_url" alt="生成图像" :preview="true" />
+      {{ image_url }}
+      <a-image :src="image_url" alt="生成图像" :preview="true" :width="500" :height="500" />
     </div>
     <div v-else class="no-image">
       <a-result status="info" title="暂无图像" subtitle="生成失败"></a-result>
@@ -20,12 +21,10 @@
 
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue'
-import { useRouter } from 'vue-router'
 import { useImageStore } from '@/stores/imageStore'
 import { storeToRefs } from 'pinia'
 import { Message } from '@arco-design/web-vue'
 
-const router = useRouter()
 const imageStore = useImageStore()
 const { currentResult } = storeToRefs(imageStore)
 
@@ -34,6 +33,7 @@ const input_text = computed(() => currentResult.value?.input_text || '')
 const result_image_url = computed(() => currentResult.value?.result_image_url || '')
 const created_at = computed(() => currentResult.value?.created_at || '')
 const answer_text = computed(() => currentResult.value?.answer_text || '')
+const image_url = computed(() => import.meta.env.VITE_API_BASE_URL + result_image_url.value)
 
 // 格式化时间显示
 const formattedTime = computed(() => {
@@ -54,10 +54,6 @@ onMounted(() => {
 watch(currentResult, (newVal) => {
   console.log('当前结果更新:', newVal)
 })
-
-const goToGenerate = () => {
-  router.push({ name: 'NewChat' })
-}
 </script>
 
 <style>
